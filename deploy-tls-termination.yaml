@@ -41,7 +41,7 @@ data:
       listen 2443;
       return 308 https://$host$request_uri;
     }
-  proxy-real-ip-cidr: 172.20.0.0/16
+  proxy-real-ip-cidr: XXXX.XXXX.XXXX.XXXX/XX #VPC CIDR in use for the Kubernetes cluster
   use-forwarded-headers: 'true'
 ---
 # Source: ingress-nginx/templates/clusterrole.yaml
@@ -283,7 +283,7 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
     service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '60'
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:eu-central-1:092663235681:certificate/c85fcfe8-bd89-4290-b41b-00b72f199775
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:XXXXXXXXXXXXXX:certificate/XXXXXXX-XXXXXXXXXXX #AWS Certificate Manager (ACM) ID
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
     service.beta.kubernetes.io/aws-load-balancer-type: elb
   labels:
