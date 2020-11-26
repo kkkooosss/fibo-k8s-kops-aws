@@ -53,7 +53,7 @@ export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
 5. Create S3 bucket for the state-storage of cluster
 ```
 aws s3api create-bucket \
-    --bucket kacar-cluster-state-store \
+    --bucket kops1-storage \
     --create-bucket-configuration LocationConstraint=eu-central-1 \ #if the region is NOT the <us-east-1>#
     --region eu-central-1
 ``` 
@@ -94,5 +94,27 @@ Check the cluster
  ```
 kops validate cluster
 kops validate cluster --wait 10m
+```
+# Deployment.
+
+1. Clone the REPO
+```
+git clone https://github.com/kkkooosss/fibo-k8s-kops-aws.git
+```
+2. In *ingress-srvice.yaml* change the domain name to yours.
+   
+3. In *deploy-tls-termination.yaml* change VPC CIDR block from you cluster VPC. And *arn* of SSL certificate
+4. Also you can change password in *secret.yaml*. It's a password for postgress DB. (Note. It should be base 64 encoded)
+5. Install kubectl if you don't have it yet.
+6. deploy the application
+```
+kubectl apply -f .
+```
+we have get the complete deployment.
+
+Last step. Go to Rote53 in you aws account and adjust A Record in hosted zone of your domain for cluster loadbalancer which had been created. 
+DNS name of LB you can find in :
+```
+kubectl describe ingress ingress-service 
 ```
 
