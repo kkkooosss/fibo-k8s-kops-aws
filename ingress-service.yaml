@@ -7,7 +7,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: fibo.kkacar.tk
+    - host: fibo.your_domain.com
       http:
         paths:
           - path: /
